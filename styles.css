@@ -1,0 +1,191 @@
+/* Color constants */
+:root {
+  --border-color: #cccccc;
+  --region-border-color: #cccccc;
+  --cell-border-color: #cccccc;
+  --cell-background-color: #ffffff;
+  --selected-cell-background-color: #ddf7d3;
+  --clue-font-color: #000000;
+  --clue-font: 'Helvetica', sans-serif;
+  --cell-font-color: #4e4e4e;
+  --cell-font: 'Arial', sans-serif;
+}
+
+/* Font options */
+/*
+--cell-font: "Helvetica", sans-serif;
+--cell-font: "Roboto", sans-serif;
+--cell-font: "Verdana", sans-serif;
+--cell-font: "Tahoma", sans-serif;
+*/
+
+body {
+  box-sizing: border-box;
+}
+
+/* Sudoku board styles */
+#sudoku-board {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(9, 1fr);
+  grid-gap: 1px;
+  background-color: var(--cell-border-color);
+  padding: 3px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.cell {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  justify-content: center;
+  align-items: center;
+  background-color: var(--cell-background-color);
+  font-family: var(--cell-font);
+  user-select: none;
+  cursor: pointer;
+  border: 1px solid var(--cell-border-color);
+  aspect-ratio: 1/1;
+}
+
+.cell {
+  color: var(--cell-font-color);
+}
+
+.clue {
+  color: var(--clue-font-color);
+  font-weight: bold;
+  font-family: var(--clue-font);
+}
+
+.cell.selected {
+  background-color: var(--selected-cell-background-color);
+  filter: brightness(92%);
+}
+
+.cell.selected-row,
+.cell.selected-column,
+.cell.selected-region {
+  background-color: var(--selected-cell-background-color);
+}
+
+.mistake-present {
+  background-color: #ff0000 !important;
+}
+
+/* Media Queries */
+
+/* Laptop and larger screens */
+@media screen and (min-width: 1024px) {
+  #game-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #sudoku-board {
+    width: 66.66%;
+    height: 66.66%;
+  }
+
+  .sudoku-commands {
+    width: 33.33%;
+  }
+}
+
+/* Tablet screens */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  #game-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #sudoku-board {
+    width: 100%;
+  }
+
+  .sudoku-commands {
+    width: 100%;
+  }
+}
+
+/* Smartphone screens */
+@media screen and (max-width: 767px) {
+  #game-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #sudoku-board {
+    width: 100%;
+  }
+
+  .sudoku-commands {
+    width: 100%;
+  }
+}
+
+/* Cell border and font size */
+/* Cells with column attribute 2 and 5 */
+.cell[column='2'],
+.cell[column='5'] {
+  border-right: 3px solid var(--region-border-color);
+}
+
+/* Cells with row attribute 2 and 5 */
+.cell[row='2'],
+.cell[row='5'] {
+  border-bottom: 3px solid var(--region-border-color);
+}
+
+.cell {
+  font-size: calc(3vw + 2.5vh); /* Use viewport units */
+}
+
+.notes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: calc(1vw + 1vh); /* Use viewport units */
+  color: var(--cell-font-color);
+  opacity: 0.6;
+}
+
+/* Grid layout for notes */
+.cell .note-1 {
+  grid-column: 1;
+  grid-row: 1;
+}
+.cell .note-2 {
+  grid-column: 2;
+  grid-row: 1;
+}
+.cell .note-3 {
+  grid-column: 3;
+  grid-row: 1;
+}
+.cell .note-4 {
+  grid-column: 1;
+  grid-row: 2;
+}
+.cell .note-5 {
+  grid-column: 2;
+  grid-row: 2;
+}
+.cell .note-6 {
+  grid-column: 3;
+  grid-row: 2;
+}
+.cell .note-7 {
+  grid-column: 1;
+  grid-row: 3;
+}
+.cell .note-8 {
+  grid-column: 2;
+  grid-row: 3;
+}
+.cell .note-9 {
+  grid-column: 3;
+  grid-row: 3;
+}
